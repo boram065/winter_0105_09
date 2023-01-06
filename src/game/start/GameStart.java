@@ -13,33 +13,31 @@ import javax.swing.JPanel;
 import game.view.GameView;
 
 public class GameStart extends JFrame {
+	ImageIcon icon = new ImageIcon("images/background.jpg");
 	
 	public GameStart() {
 		setTitle("똥 피하기 게임");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(1000, 600);
+		setResizable(false);
 		setLocationRelativeTo(null);
 		setVisible(true);
-		
-		JPanel jp = new JPanel();
-		jp.setLayout(null);
-		ImageIcon icon = new ImageIcon("images/background.jpg");
-		JLabel background = new JLabel(icon);
-		jp.add(background);
+	
+		JLabel jl = new JLabel(icon);
+		add(jl);
 		
 		JButton start = new JButton("게 임 시 작");
-		start.setBounds(380, 300, 200, 50);
+		start.setBounds(250, 350, 200, 50);
 		start.setFont(new Font("한컴 고딕", Font.BOLD, 20));
 		start.addActionListener(jbL);
 		
 		JButton way = new JButton("게 임 방 법");
-		way.setBounds(380, 360, 200, 50);
+		way.setBounds(550, 350, 200, 50);
 		way.setFont(new Font("한컴 고딕", Font.BOLD, 20));
 		way.addActionListener(jbL);
 		
 		add(way);
 		add(start);
-		add(jp);
 	}
 	
 	ActionListener jbL = new ActionListener() {

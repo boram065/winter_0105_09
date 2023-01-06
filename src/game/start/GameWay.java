@@ -18,11 +18,11 @@ public class GameWay extends JFrame{
 		setTitle("게임방법");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(1000, 600);
+		setResizable(false);
 		setLocationRelativeTo(null);
 		setVisible(true);
 		
 		JPanel jp = new JPanel();
-		jp.setLayout(null);
 		jp.setBackground(Color.WHITE);
 		
 		JLabel jl = new JLabel();
@@ -33,14 +33,20 @@ public class GameWay extends JFrame{
 				+ "<br>3. 똥에 맞았을 경우 -10점"
 				+ "<br>4. 보석을 맞았을 경우 +5점이다."
 				+ "<br><br>너의 실력에 맡긴다. 그럼 이만..</html>");
+		jp.add(jl);
 		
 		JButton start = new JButton("게 임 시 작");
 		start.setBounds(740, 500, 200, 50);
 		start.setFont(new Font("한컴 고딕", Font.BOLD, 20));
 		start.addActionListener(jbL);
 		
-		jp.add(jl);
-		jp.add(start);
+		JButton end = new JButton("게 임 종 료");
+		end.setBounds(50, 500, 200, 50);
+		end.setFont(new Font("한컴 고딕", Font.BOLD, 20));
+		end.addActionListener(jbL);
+
+		add(start);
+		add(end);
 		add(jp);
 	}
 	
@@ -48,9 +54,14 @@ public class GameWay extends JFrame{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			GameView view = new GameView();
-			view.setVisible(true);
-			setVisible(false);
+			switch(e.getActionCommand()) {
+				case "게 임 시 작" :
+					GameView view = new GameView();
+					view.setVisible(true);
+					setVisible(false); break;
+				case "게 임 종 료" :
+					setVisible(false); break;
+			}//switch
 		}
 	};
 

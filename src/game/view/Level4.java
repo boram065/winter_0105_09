@@ -1,14 +1,11 @@
 package game.view;
 
 import java.awt.Color;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -16,33 +13,29 @@ import javax.swing.JOptionPane;
 import game.vo.Diamond;
 import game.vo.Hail;
 
-public class GameView extends JFrame {
-	//20개의 우박 객체 참조값이 저장되는 배열
-	Hail[] hails = new Hail[20]; 
+public class Level4 extends JFrame{
+
+	//35개의 우박 객체 참조값이 저장되는 배열
+	Hail[] hails = new Hail[35]; 
 	JLabel[] lblHails = new JLabel[hails.length];
-	Diamond[] diamonds = new Diamond[hails.length-5];
+	Diamond[] diamonds = new Diamond[hails.length-10];
 	JLabel[] lblDiamonds = new JLabel[diamonds.length];
 	JLabel charjl = new JLabel();
 	JLabel scorejl = new JLabel("점수 : ");
 	int score = 0;
-	String[] comboCharStr = {"윤환쌤", "영철쌤", "이해원", "조서현", "황혜경"};
-	JComboBox<String> comboChar = new JComboBox<String>(comboCharStr);
 	private int FRAME_WIDTH = 1000;
 	private int FRAME_HEIGHT = 600;
 	
-	public GameView() {
+	public Level4() {
 		setLayout(null);
 		getContentPane().setBackground(Color.WHITE);
 		Random random = new Random();
 		HailThread hThread = null;
 		DiamondThread dThread = null;
 		scorejl.setBounds(900, 20, 100, 30);
-		comboChar.setBounds(830, 20, 70, 30);
-		comboChar.addItemListener(comboL);
 		add(scorejl);
-		add(comboChar);
 		
-		//20개의 우박 객체를 생성해서 배열에 저장
+		//30개의 우박 객체를 생성해서 배열에 저장
 		for (int i = 0; i < hails.length; i++) {
 			hails[i] = new Hail();
 			hails[i].setX(i * 70);
@@ -58,7 +51,7 @@ public class GameView extends JFrame {
 			hThread.start();
 		}
 		
-		//15개의 다이아몬드 객체를 생성해서 배열에 저장
+		//20개의 다이아몬드 객체를 생성해서 배열에 저장
 		for (int i = 0; i < diamonds.length; i++) {
 			diamonds[i] = new Diamond();
 			diamonds[i].setX(i * 140 + random.nextInt(70));
@@ -81,7 +74,7 @@ public class GameView extends JFrame {
 		add(charjl);
 		addKeyListener(keyL);
 		
-		setTitle("똥 피하기 게임");
+		setTitle("Level2");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(1000, 600);
 		setResizable(false);
@@ -114,50 +107,13 @@ public class GameView extends JFrame {
 		}//for
 		
 		if(score < 0) {
-			JOptionPane.showMessageDialog(GameView.this, "게임이 종료되었습니다.", "게임종료", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(Level4.this, "게임이 종료되었습니다.", "게임종료", JOptionPane.ERROR_MESSAGE);
 			setVisible(false);
-		}else if(score >= 200){
-			int answer = JOptionPane.showConfirmDialog(GameView.this, "200점을 달성하셨습니다.\nLevel2로 넘어가시겠습니까?", "Level2", JOptionPane.YES_NO_OPTION);
-			switch(answer) {
-				case JOptionPane.YES_OPTION :  
-					Level2 level = new Level2();
-					level.setVisible(true);
-					setVisible(false);
-				case JOptionPane.NO_OPTION :
-					setVisible(false);
-			}//switch
-			
+		}else if(score >= 500){
+			JOptionPane.showMessageDialog(Level4.this, "축하합니다.\n500점을 달성하셨습니다.\n지금부터 이 게임의 마스터이십니다.", "게임 클리어", JOptionPane.PLAIN_MESSAGE);
+			setVisible(false);
 		}//if
 	}
-	
-	ItemListener comboL = new ItemListener() {
-			
-		@Override
-		public void itemStateChanged(ItemEvent e) {
-			ImageIcon icon = null;
-			String imgName = null;
-			switch (comboChar.getSelectedIndex()) {
-			case 0:
-				imgName = "0";
-				break;
-			case 1:
-				imgName = "1";
-				break;
-			case 2:
-				imgName = "2";
-				break;
-			case 3:
-				imgName = "3";
-				break;
-			case 4:
-				imgName = "4";
-				break;
-			}
-			icon = new ImageIcon("images/말" + imgName + ".jpg");
-			charjl.setIcon(icon);
-		}
-		
-	};
 	
 	KeyAdapter keyL = new KeyAdapter() {
 		public void keyPressed(KeyEvent e) {
@@ -245,6 +201,4 @@ public class GameView extends JFrame {
 		}
 	}//class
 	
-}//class
-
-
+}
